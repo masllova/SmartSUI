@@ -22,33 +22,37 @@ public struct SmartTextField: View {
                 }
             )
             .font(config.font)
-            .foregroundColor(config.textColor)
+            .foregroundColor(config.colors.text)
             .onChange(of: text) { newValue in
                 applyMaxLength()
                 validate()
             }
-            .padding(12)
-            .overlay(
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(borderColor, lineWidth: 1)
-            )
+            .smartPadding(config.padding)
+            .smartRounded(config.rounded)
+            .smartStroke(config.stroke, color: borderColor)
             
             if let error {
                 Text(error)
                     .font(config.font)
-                    .foregroundColor(config.errorBorderColor)
+                    .foregroundColor(config.colors.errorBorder)
             }
         }
     }
     
     private var borderColor: Color {
-        if error != nil { return config.errorBorderColor }
-        if isFocused { return config.focusedBorderColor }
-        return config.borderColor
+        if error != nil {
+            return config.colors.errorBorder
+        } else if isFocused {
+            return config.colors.focusedBorder
+        } else {
+            return config.colors.border
+        }
     }
     
     private func applyMaxLength() {
-        guard let maxLength = config.maxLength else { return }
+        guard let maxLength = config.maxLength else {
+            return
+        }
         if text.count > maxLength {
             text = String(text.prefix(maxLength))
         }
