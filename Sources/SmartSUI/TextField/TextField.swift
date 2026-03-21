@@ -12,29 +12,43 @@ public struct SmartTextField: View {
     }
     
     public var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            TextField(
-                config.placeholder,
-                text: $text,
-                onEditingChanged: { focused in
-                    isFocused = focused
+        VStack(alignment: .leading, spacing: 0) {
+            HStack {
+                ForEach(config.icons, id: \.id) { icon in
+                    makeIconView(icon: icon, locaion: .left)
+                        .visibleIf(icon.isVisible(textIsEmpty: text.isEmpty))
+                }
+                
+                TextField(
+                    config.placeholder,
+                    text: $text,
+                    onEditingChanged: { focused in
+                        isFocused = focused
+                        validate()
+                    }
+                )
+                .font(config.font)
+                .foregroundColor(config.colors.text)
+                .onChange(of: text) { newValue in
+                    applyMaxLength()
                     validate()
                 }
-            )
-            .font(config.font)
-            .foregroundColor(config.colors.text)
-            .onChange(of: text) { newValue in
-                applyMaxLength()
-                validate()
+                .smartPadding(config.padding.textField)
+                .smartRounded(config.rounded)
+                .smartStroke(config.stroke, color: borderColor)
+                .frame(maxWidth: .infinity)
+                
+                ForEach(config.icons, id: \.id) { icon in
+                    makeIconView(icon: icon, locaion: .right)
+                        .visibleIf(icon.isVisible(textIsEmpty: text.isEmpty))
+                }
             }
-            .smartPadding(config.padding)
-            .smartRounded(config.rounded)
-            .smartStroke(config.stroke, color: borderColor)
             
             if let error {
                 Text(error)
                     .font(config.font)
                     .foregroundColor(config.colors.errorBorder)
+                    .smartPadding(config.padding.error)
             }
         }
     }
@@ -47,6 +61,34 @@ public struct SmartTextField: View {
         } else {
             return config.colors.border
         }
+    }
+    
+    @ViewBuilder
+    private func makeIconView(icon: TextFieldConfig.Icon, locaion: TextFieldConfig.Icon.Aligment) -> some View {
+        if locaion == icon.location {
+            if let acion = icon.action {
+                Button {
+                    switch acion {
+                    case .clear:
+                        text = ""
+                        isFocused = false
+                    case .custom(let void):
+                        void()
+                    }
+                } label: {
+                    makeImage(image: icon.icon, size: icon.size, padding: icon.padding)
+                }
+            } else {
+                makeImage(image: icon.icon, size: icon.size, padding: icon.padding)
+            }
+        }
+    }
+    
+    private func makeImage(image: Image, size: Size, padding: SmartPaddingStyleModifier.Padding) -> some View {
+        image
+            .resizable()
+            .size(size)
+            .smartPadding(padding)
     }
     
     private func applyMaxLength() {

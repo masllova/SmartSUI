@@ -23,6 +23,14 @@ public struct SmartPaddingStyleModifier: ViewModifier {
             self.trailing = all
             self.bottom = all
         }
+        
+        public init(vertical: CGFloat = 16,
+                    horizontal: CGFloat = 16) {
+            self.top = vertical
+            self.leading = horizontal
+            self.trailing = horizontal
+            self.bottom = vertical
+        }
     }
     
     let padding: Padding?
