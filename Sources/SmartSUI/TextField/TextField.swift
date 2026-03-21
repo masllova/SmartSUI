@@ -1,11 +1,11 @@
 import SwiftUI
 
 public struct SmartTextField: View {
-    @Binding var text: String
+    @Binding public var text: String
     @State private var isFocused = false
     @State private var error: String?
     
-    let config: TextFieldConfig
+    public let config: TextFieldConfig
     
     public var body: some View {
         VStack(alignment: .leading, spacing: 6) {
