@@ -102,13 +102,11 @@ public struct SmartTextField: View {
     
     private func validate() {
         for rule in config.rules {
-            switch rule.validate(text) {
-            case .success:
-                error = nil
-            case .failure(let message):
+            if case .failure(let message) = rule.validate(text) {
                 error = message
                 return
             }
         }
+        error = nil
     }
 }
