@@ -46,19 +46,19 @@ public struct TextFieldConfig {
         let text: Color
         let background: Color
         let border: Color
-        let focusedBorder: Color
-        let errorBorder: Color
+        let focused: Color
+        let error: Color
         
         public init(text: Color = .black,
                     background: Color = .gray.opacity(0.5),
                     border: Color = .gray,
-                    focusedBorder: Color = .accentColor,
-                    errorBorder: Color = .red) {
+                    focused: Color = .accentColor,
+                    error: Color = .red) {
             self.text = text
             self.background = background
             self.border = border
-            self.focusedBorder = focusedBorder
-            self.errorBorder = errorBorder
+            self.focused = focused
+            self.error = error
         }
     }
     

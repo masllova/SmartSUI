@@ -47,7 +47,7 @@ public struct SmartTextField: View {
             if let error {
                 Text(error)
                     .font(config.font)
-                    .foregroundColor(config.colors.errorBorder)
+                    .foregroundColor(config.colors.error)
                     .smartPadding(config.padding.error)
             }
         }
@@ -55,9 +55,9 @@ public struct SmartTextField: View {
     
     private var borderColor: Color {
         if error != nil {
-            return config.colors.errorBorder
+            return config.colors.error
         } else if isFocused {
-            return config.colors.focusedBorder
+            return config.colors.focused
         } else {
             return config.colors.border
         }
