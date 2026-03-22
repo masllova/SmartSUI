@@ -24,9 +24,8 @@ public struct SmartTextEditor: View {
                 if text.isEmpty {
                     Text(config.placeholder)
                         .font(config.font)
-                        .foregroundColor(.gray)
-                        .padding(.horizontal, 18)
-                        .padding(.vertical, 16)
+                        .foregroundColor(config.colors.placeholder)
+                        .smartPadding(config.padding.placeholder)
                 }
                 
                 TextEditor(text: $text)

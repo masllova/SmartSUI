@@ -30,28 +30,34 @@ public struct TextEditorConfig {
     
     public struct Padding {
         let textField: SmartPaddingStyleModifier.Padding
+        let placeholder: SmartPaddingStyleModifier.Padding
         let error: SmartPaddingStyleModifier.Padding
         
         public init(textField: SmartPaddingStyleModifier.Padding = .init(),
+                    placeholder: SmartPaddingStyleModifier.Padding = .init(vertical: 18, horizontal: 14),
                     error: SmartPaddingStyleModifier.Padding = .init()) {
             self.textField = textField
+            self.placeholder = placeholder
             self.error = error
         }
     }
     
     public struct Colors {
         let text: Color
+        let placeholder: Color
         let background: Color
         let border: Color
         let focused: Color
         let error: Color
         
         public init(text: Color = .black,
+                    placeholder: Color = .black,
                     background: Color = .gray,
                     border: Color = .black,
                     focused: Color = .accentColor,
                     error: Color = .red) {
             self.text = text
+            self.placeholder = placeholder
             self.background = background
             self.border = border
             self.focused = focused
