@@ -2,6 +2,7 @@ import SwiftUI
 
 public struct TextFieldConfig {
     let placeholder: String
+    let isSecure: Bool
     let maxLength: Int?
     let rules: [ValidationRule]
     let padding: Padding
@@ -12,6 +13,7 @@ public struct TextFieldConfig {
     let icons: [Icon]
     
     public init(placeholder: String = "placeholder",
+                isSecure: Bool = false,
                 maxLength: Int? = nil,
                 rules: [ValidationRule] = [],
                 padding: Padding = .init(),
@@ -21,6 +23,7 @@ public struct TextFieldConfig {
                 font: Font = .caption,
                 icons: [Icon] = []) {
         self.placeholder = placeholder
+        self.isSecure = isSecure
         self.maxLength = maxLength
         self.rules = rules
         self.padding = padding
@@ -98,6 +101,7 @@ public struct TextFieldConfig {
         
         public enum Action {
             case clear
+            case toggleIsSecure
             case custom(() -> Void)
         }
         

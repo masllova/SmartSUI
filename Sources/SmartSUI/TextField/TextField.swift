@@ -3,11 +3,13 @@ import SwiftUI
 public struct SmartTextField: View {
     @Binding private var text: String
     @State private var isFocused = false
+    @State private var isSecure = false
     @State private var error: String?
     private let config: TextFieldConfig
     
     public init(text: Binding<String>, config: TextFieldConfig) {
         self._text = text
+        self.isSecure = config.isSecure
         self.config = config
     }
     
@@ -19,14 +21,23 @@ public struct SmartTextField: View {
                         .visibleIf(icon.isVisible(textIsEmpty: text.isEmpty))
                 }
                 
-                TextField(
-                    config.placeholder,
-                    text: $text,
-                    onEditingChanged: { focused in
-                        isFocused = focused
-                        validate()
+                Group {
+                    if isSecure {
+                        SecureField(
+                            config.placeholder,
+                            text: $text
+                        )
+                    } else {
+                        TextField(
+                            config.placeholder,
+                            text: $text,
+                            onEditingChanged: { focused in
+                                isFocused = focused
+                                validate()
+                            }
+                        )
                     }
-                )
+                }
                 .font(config.font)
                 .foregroundColor(config.colors.text)
                 .onChange(of: text) { newValue in
@@ -74,6 +85,8 @@ public struct SmartTextField: View {
                         isFocused = false
                     case .custom(let void):
                         void()
+                    case .toggleIsSecure:
+                        isSecure.toggle()
                     }
                 } label: {
                     makeImage(image: icon.icon, size: icon.size, padding: icon.padding)
