@@ -21,13 +21,6 @@ public struct SmartTextEditor: View {
     public var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             ZStack(alignment: .topLeading) {
-                if text.isEmpty {
-                    Text(config.placeholder)
-                        .font(config.font)
-                        .foregroundColor(config.colors.placeholder)
-                        .smartPadding(config.padding.placeholder)
-                }
-                
                 TextEditor(text: $text)
                     .font(config.font)
                     .onTapGesture {
@@ -42,6 +35,13 @@ public struct SmartTextEditor: View {
                     .smartRounded(config.rounded)
                     .smartStroke(config.stroke, color: borderColor)
                     .frame(height: height)
+                
+                if text.isEmpty {
+                    Text(config.placeholder)
+                        .font(config.font)
+                        .foregroundColor(config.colors.placeholder)
+                        .smartPadding(config.padding.placeholder)
+                }
             }
             
             if let error {
