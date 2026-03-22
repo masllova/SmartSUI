@@ -25,8 +25,8 @@ public struct SmartTextEditor: View {
                     Text(config.placeholder)
                         .font(config.font)
                         .foregroundColor(.gray)
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 14)
+                        .padding(.horizontal, 18)
+                        .padding(.vertical, 16)
                 }
                 
                 TextEditor(text: $text)

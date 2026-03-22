@@ -47,8 +47,8 @@ public struct TextEditorConfig {
         let error: Color
         
         public init(text: Color = .black,
-                    background: Color = .gray.opacity(0.5),
-                    border: Color = .gray,
+                    background: Color = .gray,
+                    border: Color = .black,
                     focused: Color = .accentColor,
                     error: Color = .red) {
             self.text = text
