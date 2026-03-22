@@ -34,7 +34,7 @@ public struct TextEditorConfig {
         let error: SmartPaddingStyleModifier.Padding
         
         public init(textField: SmartPaddingStyleModifier.Padding = .init(),
-                    placeholder: SmartPaddingStyleModifier.Padding = .init(vertical: 18, horizontal: 14),
+                    placeholder: SmartPaddingStyleModifier.Padding = .init(vertical: 24, horizontal: 20),
                     error: SmartPaddingStyleModifier.Padding = .init()) {
             self.textField = textField
             self.placeholder = placeholder
