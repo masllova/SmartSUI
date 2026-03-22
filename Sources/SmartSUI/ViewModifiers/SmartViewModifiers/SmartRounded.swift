@@ -5,7 +5,7 @@ public struct SmartRoundedStyleModifier: ViewModifier {
         let backgroundColor: Color
         let radius: CGFloat
         
-        public init(backgroundColor: Color = .gray.opacity(0.5),
+        public init(backgroundColor: Color = .gray,
                     radius: CGFloat = 8) {
             self.backgroundColor = backgroundColor
             self.radius = radius

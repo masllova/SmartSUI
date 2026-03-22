@@ -31,7 +31,6 @@ public struct SmartTextEditor: View {
                 
                 TextEditor(text: $text)
                     .font(config.font)
-                    .foregroundColor(config.colors.text)
                     .onTapGesture {
                         isFocused = true
                     }
@@ -39,7 +38,7 @@ public struct SmartTextEditor: View {
                         applyMaxLength()
                         validate()
                     }
-                    .smartBackgroundFix(config.colors.background)
+                    .smartBackgroundFix(.clear)
                     .smartPadding(config.padding.textField)
                     .smartRounded(config.rounded)
                     .smartStroke(config.stroke, color: borderColor)
